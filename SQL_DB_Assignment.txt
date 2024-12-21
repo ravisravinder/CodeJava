@@ -1,0 +1,48 @@
+Students
+subjects : maths, phy, che
+
+Create a DB--> 1 or more then 1 student , 1 sub can be multiple
+
+Student table:
+==================
+Students:
+stuid(PK), StudentName, 
+1
+
+Subject Table:
+=====================
+Subjects:
+suid (PK),     subject_name, 
+1,       Maths              
+2,       Physics                  
+3,       Chemistry                  
+
+Student&Subject Table Relation:
+=================================
+StuSub
+id(Pk),stuId(Fk), SubId(FK)
+1         1        2
+2         2        3 
+3
+-----------------------------------------------------------------------------------------------
+//read subid, no of students enrolled to the subject, if there are more then 50 students enrolled.
+return those subjects where min of 50 students
+
+select SubId,
+	count(stuId) as StuJoinedInSubj
+	from
+	StuSub
+	Group by SubId
+	having count (StuId) >50;
+	
+-----------------------------------------------------------------------------------------------------------	
+
+select Subject from course 
+//findout second highest subject id withrespect to no of students enrolled
+
+select SubId from StuSub
+Group By SubId 
+Order By count(SubId) Desc
+Limit 1 OFFSET 1
+
+=========================
